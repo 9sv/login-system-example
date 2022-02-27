@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Forgot Password</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <style>
+        footer {
+            position: fixed;
+            bottom: 25px;
+        }
+    </style>
+    <body>
+        <center>
+            <h1>Forgot your password?</h1>
+        </center>
+        <br><br>
+        <center>
+            <form method="POST">
+                <input type="text" placeholder="Username / Email" name="username" required>
+                <button type="submit">Reset password</button>
+            </form>
+        </center>
+    </body>
+    <footer>
+        <div>
+            <a href="{{login}}">
+                <button>Back to login</button>
+            </a>
+        </div>
+    </footer>
+</html>
