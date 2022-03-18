@@ -4,7 +4,7 @@ cd login-system-example
 rm -rf README.md
 ```
 
-Replace values in ext/reset_pass.py
+Replace value sin config.ini
 
 ```
 pip install flask
