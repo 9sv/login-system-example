@@ -1,15 +1,15 @@
+import configparser
 import hashlib
 import secrets
 import sqlite3
 from http import HTTPStatus
 
-from flask import (Flask, Response, abort, redirect, render_template, render_template_string, request,
-                   url_for)
+from flask import (Flask, Response, abort, redirect, render_template,
+                   render_template_string, request, url_for)
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
-from ext.reset_pass import send_reset_code
-from ext.reset_pass import reset_codes
+from ext.reset_pass import reset_codes, send_reset_code
 
 app = Flask(__name__)
 limiter = Limiter(app, key_func=get_remote_address)
@@ -21,6 +21,8 @@ def check_db():
     """
     global database
     global cursor
+    global config
+    config = configparser.ConfigParser().read("config.ini")
     database = sqlite3.connect('logins.db', check_same_thread=False)
     cursor = database.cursor()
     cursor.execute("""CREATE TABLE IF NOT EXISTS `logins` (
@@ -83,7 +85,7 @@ def reset_password():
         if bool(row is None):
             return abort(Response("No account found", HTTPStatus.UNAUTHORIZED))
         email = row[0]
-        send_reset_code(email, request.base_url)
+        send_reset_code(email, config)
         return Response("Reset link sent to email", 200)
 
 @app.route('/reset_password/<token>', methods=["GET", "POST"])
