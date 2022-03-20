@@ -4,7 +4,7 @@ cd login-system-example
 rm -rf README.md
 ```
 
-Replace value sin config.ini
+Replace values in config.ini
 
 ```
 pip install flask
